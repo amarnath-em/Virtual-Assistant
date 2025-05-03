@@ -25,7 +25,13 @@ def processCommand(c):
         song = c.lower().split(" ")[1]
         link = musicLibrary.music[song]
         webbrowser.open(link)
-    
+    elif "news" in c.lower():
+        r=requests.get(f"https://newsapi.org/v2/top-headlines?country=in&apiKey={nwsapi}")
+        if r.status_code == 200:
+            data=r.json()
+            articles=data.get('articles',[])
+            for article in articles:
+                speak(article['title'])
 
     
 
